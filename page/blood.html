@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembelian Blood Strike</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; background: #f4f4f4; }
+        .container { max-width: 400px; margin: auto; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); }
+        input, select, button { width: 100%; padding: 10px; margin: 5px 0; font-size: 16px; }
+        button { background: #007bff; color: white; border: none; cursor: pointer; }
+        button:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Pembelian Blood Strike</h2>
+        <form id="orderForm">
+            <input type="text" name="id_game" id="id_game" placeholder="Masukkan ID Game" required>
+            <select name="membership" id="membership">
+                <option value="">Pilih Membership</option>
+                <option value="Strike Pass Elite - Rp. 60.000">Strike Pass Elite - Rp. 60.000</option>
+                <option value="Strike Pass Premium - Rp. 125.000">Strike Pass Premium - Rp. 125.000</option>
+            </select>
+            <select name="topup" id="topup">
+                <option value="">Pilih Top-up</option>
+                <option value="100 Gold - Rp. 20.000">100 Gold - Rp. 20.000</option>
+                <option value="300 Gold - Rp. 50.000">300 Gold - Rp. 50.000</option>
+                <option value="500 Gold - Rp. 80.000">500 Gold - Rp. 80.000</option>
+                <option value="1.000 Gold - Rp. 150.000">1.000 Gold - Rp. 150.000</option>
+                <option value="2.000 Gold - Rp. 300.000">2.000 Gold - Rp. 300.000</option>
+            </select>
+            <button type="button" onclick="kirimWhatsApp()">Beli Sekarang</button>
+        </form>
+    </div>
+
+    <script>
+        function kirimWhatsApp() {
+            var idGame = document.getElementById("id_game").value;
+            var membership = document.getElementById("membership").value;
+            var topup = document.getElementById("topup").value;
+
+            if (idGame === "") {
+                alert("Masukkan ID Game terlebih dahulu!");
+                return;
+            }
+
+            if (membership === "" && topup === "") {
+                alert("Pilih Membership atau Top-up!");
+                return;
+            }
+
+            var pesan = "Halo, saya ingin membeli Blood Strike\n";
+            pesan += "ID Game: " + idGame + "\n";
+            if (membership !== "") pesan += "Membership: " + membership + "\n";
+            if (topup !== "") pesan += "Top-up: " + topup + "\n";
+
+            var nomorWa = "6281538769551"; // Ganti dengan nomor WhatsApp tujuan
+            var url = "https://wa.me/" + nomorWa + "?text=" + encodeURIComponent(pesan);
+            window.open(url, "_blank");
+        }
+    </script>
+</body>
+</html>

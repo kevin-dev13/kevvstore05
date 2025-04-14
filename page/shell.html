@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Form Pembelian Garena Shell</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(-45deg, #ff4e50, #f9d423, #24c6dc, #5433ff);
+      background-size: 400% 400%;
+      animation: gradientMove 15s ease infinite;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 400px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #222;
+    }
+
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      transition: border 0.2s;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #5433ff;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      background: #5433ff;
+      color: white;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #3728c3;
+    }
+
+    .instructions {
+      margin-top: 30px;
+      background: #f0f0f0;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .instructions h2 {
+      margin-top: 0;
+      color: #333;
+    }
+
+    .instructions ol {
+      padding-left: 20px;
+      color: #444;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Pembelian Garena Shell</h1>
+    <form id="garenaForm">
+      <label for="phone">ID Pengguna:</label>
+      <input type="text" id="phone" name="phone" required placeholder="Masukkan ID Pengguna Anda" />
+
+      <label for="nominal">Jumlah Shell:</label>
+      <select id="nominal" name="nominal" required>
+        <option value="">--Pilih Nominal--</option>
+        <option value="33 Shell Rp. 12.000">33 Shell Rp. 12.000</option>
+        <option value="66 Shell Rp. 22.000">66 Shell Rp. 22.000</option>
+        <option value="165 Shell Rp. 52.000">165 Shell Rp. 52.000</option>
+        <option value="330 Shell Rp. 102.000">330 Shell Rp. 102.000</option>
+      </select>
+
+      <button type="submit">Kirim</button>
+    </form>
+
+    <div class="instructions">
+      <h2>Cara Top Up:</h2>
+      <ol>
+        <li>Masukkan ID Pengguna Anda.</li>
+        <li>Pilih Jumlah Shell.</li>
+        <li>Klik tombol <strong>Kirim</strong> dan lakukan pembayaran.</li>
+        <li>Shell akan dikirim otomatis ke akun Anda setelah pembayaran.</li>
+        <li>Selesai.</li>
+      </ol>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('garenaForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const phone = document.getElementById('phone').value;
+      const nominal = document.getElementById('nominal').value;
+
+      if (!nominal) {
+        alert('Pilih jumlah Shell terlebih dahulu!');
+        return;
+      }
+
+      const message = `Kategori: Garena Shell\nID Pengguna: ${phone}\nJumlah: ${nominal}`;
+      const whatsappUrl = `https://wa.me/6281538769551?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, '_blank');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Form Pembelian Diamond Mobile Legends</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="container">
+    <h1>Form Pembelian Diamond Mobile Legends</h1>
+    <form id="diamondForm">
+      <label for="idgame">ID PENGGUNA :</label>
+      <input type="text" id="idgame" name="idgame" required><br><br>
+
+      <label for="zoneid">ZONE ID:</label>
+      <input type="text" id="zoneid" name="zoneid" required><br><br>
+
+      <label for="membership">Membership :</label>
+      <select id="membership" name="membership">
+        <option value="">--Pilih Membership--</option>
+        <option value="Weekly Diamond Pass Rp. 35.000">Weekly Diamond Pass Rp. 35.000</option>
+        <option value="Twilight Pass Rp. 170.000">Twilight Pass Rp. 170.000</option>
+      </select><br><br>
+
+      <label for="diamond">Diamond :</label>
+      <select id="diamond" name="diamond">
+        <option value="">--Pilih Diamond--</option>
+        <option value="5 Diamond Rp. 2.500">5 Diamond Rp. 2.500</option>
+        <option value="10 Diamond Rp. 4.000">10 Diamond Rp. 4.000</option>
+        <option value="12 Diamond Rp. 5.000">12 Diamond Rp. 5.000</option>
+        <option value="14 Diamond Rp. 6.000">14 Diamond Rp. 6.000</option>
+        <option value="19 Diamond Rp. 7.000">19 Diamond Rp. 7.000</option>
+        <option value="28 Diamond Rp. 10.000">28 Diamond Rp. 10.000</option>
+        <option value="36 Diamond Rp. 12.000">36 Diamond Rp. 12.000</option>
+        <option value="44 Diamond Rp. 15.000">44 Diamond Rp. 15.000</option>
+        <option value="54 Diamond Rp. 18.000">54 Diamond Rp. 18.000</option>
+        <option value="59 Diamond Rp. 20.000">59 Diamond Rp. 20.000</option>
+        <option value="70 Diamond Rp. 23.000">70 Diamond Rp. 23.000</option>
+        <option value="74 Diamond Rp. 25.000">74 Diamond Rp. 25.000</option>
+        <option value="85 Diamond Rp. 27.000">85 Diamond Rp. 27.000</option>
+        <option value="88 Diamond Rp. 30.000">88 Diamond Rp. 30.000</option>
+        <option value="110 Diamond Rp. 35.000">110 Diamond Rp. 35.000</option>
+        <option value="113 Diamond Rp. 37.000">113 Diamond Rp. 37.000</option>
+        <option value="128 Diamond Rp. 42.000">128 Diamond Rp. 42.000</option>
+        <option value="140 Diamond Rp. 45.000">140 Diamond Rp. 45.000</option>
+        <option value="170 Diamond Rp. 52.000">170 Diamond Rp. 52.000</option>
+        <option value="185 Diamond Rp. 57.000">185 Diamond Rp. 57.000</option>
+        <option value="222 Diamond Rp. 67.000">222 Diamond Rp. 67.000</option>
+        <option value="240 Diamond Rp. 72.000">240 Diamond Rp. 72.000</option>
+        <option value="257 Diamond Rp. 77.000">257 Diamond Rp. 77.000</option>
+        <option value="277 Diamond Rp. 82.000">277 Diamond Rp. 82.000</option>
+        <option value="284 Diamond Rp. 85.000">284 Diamond Rp. 85.000</option>
+        <option value="296 Diamond Rp. 87.000">296 Diamond Rp. 87.000</option>
+        <option value="370 Diamond Rp. 108.000">370 Diamond Rp. 108.000</option>
+        <option value="408 Diamond Rp. 120.000">408 Diamond Rp. 120.000</option>
+        <option value="568 Diamond Rp. 158.000">568 Diamond Rp. 158.000</option>
+        <option value="642 Diamond Rp. 175.000">642 Diamond Rp. 175.000</option>
+        <option value="716 Diamond Rp. 200.000">716 Diamond Rp. 200.000</option>
+        <option value="790 Diamond Rp. 222.000">790 Diamond Rp. 222.000</option>
+        <option value="878 Diamond Rp. 235.000">878 Diamond Rp. 235.000</option>
+        <option value="938 Diamond Rp. 262.000">938 Diamond Rp. 262.000</option>
+        <option value="966 Diamond Rp. 265.000">966 Diamond Rp. 265.000</option>
+        <option value="1.050 Diamond Rp. 288.000">1.050 Diamond Rp. 288.000</option>
+        <option value="1.136 Diamond Rp. 312.000">1.136 Diamond Rp. 312.000</option>
+        <option value="1.443 Diamond Rp. 395.000">1.443 Diamond Rp. 395.000</option>
+      </select><br><br>
+
+      <button type="submit">Kirim</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('diamondForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('idgame').value;
+      const number = document.getElementById('zoneid').value;
+      const membership = document.getElementById('membership').value;
+      const diamond = document.getElementById('diamond').value;
+
+      let message = `Kategori: Mobile Legends\nNomor ID: ${name}\nZone ID: ${number}\n`;
+
+      if (membership !== "") {
+        message += `Membership: ${membership}`;
+      } else if (diamond !== "") {
+        message += `Diamond: ${diamond}`;
+      } else {
+        alert('Pilih salah satu antara Membership atau Diamond!');
+        return;
+      }
+
+      const whatsappUrl = `https://wa.me/6281538769551?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, '_blank');
+    });
+  </script>
+</body>
+            </html>

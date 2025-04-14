@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembelian Arena of Valor</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; background: #f4f4f4; }
+        .container { max-width: 400px; margin: auto; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); }
+        input, select, button { width: 100%; padding: 10px; margin: 5px 0; font-size: 16px; }
+        button { background: #007bff; color: white; border: none; cursor: pointer; }
+        button:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Pembelian Arena of Valor</h2>
+        <form id="orderForm">
+            <input type="text" name="id_game" id="id_game" placeholder="Masukkan ID Game" required>
+            <select name="topup" id="topup">
+                <option value="">Pilih Jumlah Voucher</option>
+                <option value="40 Voucher - Rp. 15.000">40 Voucher - Rp. 15.000</option>
+                <option value="90 Voucher - Rp. 28.000">90 Voucher - Rp. 28.000</option>
+                <option value="230 Voucher - Rp. 58.000">230 Voucher - Rp. 58.000</option>
+                <option value="470 Voucher - Rp. 115.000">470 Voucher - Rp. 115.000</option>
+                <option value="950 Voucher - Rp. 220.000">950 Voucher - Rp. 220.000</option>
+            </select>
+            <button type="button" onclick="kirimWhatsApp()">Beli Sekarang</button>
+        </form>
+    </div>
+
+    <script>
+        function kirimWhatsApp() {
+            var idGame = document.getElementById("id_game").value;
+            var topup = document.getElementById("topup").value;
+
+            if (idGame === "") {
+                alert("Masukkan ID Game terlebih dahulu!");
+                return;
+            }
+
+            if (topup === "") {
+                alert("Pilih jumlah Voucher!");
+                return;
+            }
+
+            var pesan = "Halo, saya ingin membeli Voucher Arena of Valor\n";
+            pesan += "ID Game: " + idGame + "\n";
+            pesan += "Top-up: " + topup + "\n";
+
+            var nomorWa = "6281538769551"; // Ganti dengan nomor WhatsApp tujuan
+            var url = "https://wa.me/" + nomorWa + "?text=" + encodeURIComponent(pesan);
+            window.open(url, "_blank");
+        }
+    </script>
+</body>
+</html>

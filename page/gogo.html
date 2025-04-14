@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembelian Magic Chess: Go Go</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .container {
+            width: 90%;
+            max-width: 400px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Pembelian Magic Chess: Go Go</h2>
+
+        <label for="user_id">User ID</label>
+        <input type="text" id="user_id" placeholder="Masukkan User ID" required>
+
+        <label for="zone_id">Zone ID</label>
+        <input type="text" id="zone_id" placeholder="Masukkan Zone ID" required>
+
+        <label for="diamond">Pilih Diamond</label>
+        <select id="diamond">
+            <option value="5 Diamond Rp. 2.500">5 Diamond - Rp. 2.500</option>
+            <option value="12 Diamond Rp. 5.000">12 Diamond - Rp. 5.000</option>
+            <option value="19 Diamond Rp. 7.000">19 Diamond - Rp. 7.000</option>
+            <option value="28 Diamond Rp. 10.000">28 Diamond - Rp. 10.000</option>
+            <option value="44 Diamond Rp. 15.000">44 Diamond - Rp. 15.000</option>
+            <option value="59 Diamond Rp. 20.000">59 Diamond - Rp. 20.000</option>
+            <option value="85 Diamond Rp. 28.000">85 Diamond - Rp. 28.000</option>
+            <option value="170 Diamond Rp. 52.000">170 Diamond - Rp. 52.000</option>
+            <option value="240 Diamond Rp. 72.000">240 Diamond - Rp. 72.000</option>
+            <option value="296 Diamond Rp. 92.000">296 Diamond - Rp. 92.000</option>
+            <option value="408 Diamond Rp. 120.000">408 Diamond - Rp. 120.000</option>
+        </select>
+
+        <button onclick="kirimWhatsApp()">Beli Sekarang</button>
+    </div>
+
+    <script>
+        function kirimWhatsApp() {
+            var userID = document.getElementById("user_id").value;
+            var zoneID = document.getElementById("zone_id").value;
+            var diamond = document.getElementById("diamond").value;
+            
+            if(userID === "" || zoneID === "") {
+                alert("Harap isi USER ID dan ZONE ID!");
+                return;
+            }
+            
+            var pesan = `Halo, saya ingin membeli Diamond Magic Chess: Go Go.\n\n` +
+                        `🆔 USER ID: ${userID}\n` +
+                        `🌍 ZONE ID: ${zoneID}\n` +
+                        `💎 Paket: ${diamond}\n\n` +
+                        `Mohon konfirmasinya. Terima kasih!`;
+
+            var urlWA = "https://wa.me/6281538769551?text=" + encodeURIComponent(pesan);
+            window.open(urlWA, "_blank");
+        }
+    </script>
+
+</body>
+</html>
