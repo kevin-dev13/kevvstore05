@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Topup Gaming</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary-color: #0086b3;
+            --bg-color: #f5f7fa;
+            --text-color: #333333;
+            --card-bg: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        /* Navbar */
+        .navbar {
+            padding: 1rem 5%;
+            background: #ffffff;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+.running-text {
+    background: #e8f5ff;
+    padding: 14px 0;
+    margin-top: 60px;
+    position: relative;
+    overflow: hidden;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    border-top: 1px solid #e0e9f2;
+    border-bottom: 1px solid #e0e9f2;
+}
+
+.running-text::before, .running-text::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 80px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.running-text::before {
+    left: 0;
+    background: linear-gradient(to right, #e8f5ff, transparent);
+}
+
+.running-text::after {
+    right: 0;
+    background: linear-gradient(to left, #e8f5ff, transparent);
+}
+
+.running-text span {
+    display: inline-block;
+    padding-left: 100%;
+    white-space: nowrap;
+    color: #0086b3;
+    font-size: 15px;
+    font-weight: bold;
+    animation: scroll-text 18s linear infinite;
+}
+
+@keyframes scroll-text {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+.running-text i {
+    color: #0086b3;
+    margin-right: 10px;
+    animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.7; }
+}
+
+        /* Category Slider */
+        .category-container {
+            padding: 2rem 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-nav {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .category-nav button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .category-nav button:hover {
+            background: #006d93;
+            transform: scale(1.1);
+        }
+
+        .category-slider {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 1rem 0;
+            scrollbar-width: none; /* Hide scrollbar for Firefox */
+            -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+            text-decoration: none;
+        }
+
+        .category-slider::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+        }
+
+        .category-item {
+            min-width: 150px;
+            padding: 1.5rem 1rem;
+            background: linear-gradient(145deg, #0099cc, var(--primary-color));
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 134, 179, 0.2);
+            transition: var(--transition);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+        
+        .category-slider a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .category-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 134, 179, 0.3);
+        }
+
+        /* Search */
+        .search-container {
+            padding: 2rem 5%;
+            text-align: center;
+        }
+
+        #searchInput {
+            width: 100%;
+            max-width: 600px;
+            padding: 1rem;
+            border-radius: 30px;
+            border: 2px solid var(--primary-color);
+            background: white;
+            color: var(--text-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Game Grid */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            padding: 2rem 5%;
+        }
+
+        .grid-item {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 1rem;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .grid-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin: 1rem 0;
+            padding: 0.5rem 0;
+            font-weight: 600;
+        }
+
+        .grid-item h3 {
+            margin-top: 0.75rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+footer {
+  background: #e8f5ff;
+  padding: 3rem 5% 6rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  color: #555;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  z-index: 0;
+  border-top: 1px solid #d0e5f5;
+}
+
+/* Wave */
+.wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 100px;
+  background: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1440 320' xmlns='http://www.w3.org/2000/svg'><path fill='%230086b3' fill-opacity='0.05' d='M0,160L80,160C160,160,320,160,480,170.7C640,181,800,203,960,208C1120,213,1280,203,1360,197.3L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z'></path></svg>");
+  background-size: 100% 100px;
+  background-repeat: repeat-x;
+  animation: waveAnim 10s linear infinite;
+  z-index: -1;
+}
+
+#wave2 {
+  bottom: 5px;
+  animation-delay: -3s;
+  opacity: 0.07;
+}
+#wave3 {
+  bottom: 10px;
+  animation-delay: -6s;
+  opacity: 0.05;
+}
+
+@keyframes waveAnim {
+  0%   { background-position-x: 0; }
+  100% { background-position-x: -1440px; }
+}
+
+        .footer-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-icons {
+            margin: 1rem 0;
+        }
+
+        .social-icons a {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            color: #006d93;
+        }
+        
+.loader {
+  border: 5px solid #e8f5ff; /* Light blue */
+  border-top: 5px solid #0086b3; /* Darker blue */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-top: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+        /* Floating WA */
+        .wa-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            padding: 1rem;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            animation: pulse 2s infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .slider-container {
+                height: 250px;
+            }
+
+            .category-item {
+                min-width: 120px;
+                padding: 1.2rem 0.8rem;
+            }
+        }
+        
+        /* Section Tabs Styling */
+        body {
+          background: var(--bg-color);
+          color: var(--text-color);
+          font-family: 'Poppins', sans-serif;
+        }
+
+        .tab-scroll {
+          display: flex;
+          overflow-x: auto;
+          padding: 12px 16px;
+          gap: 12px;
+          background: transparent;
+          scroll-snap-type: x mandatory;
+          -webkit-overflow-scrolling: touch;
+        }
+        
+        .tab-scroll::-webkit-scrollbar {
+          display: none;
+        }
+
+        .tab-button {
+          flex: 0 0 auto;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 10px 18px;
+          border-radius: 999px;
+          background: #ffffff;
+          border: 1.5px solid var(--primary-color);
+          color: var(--primary-color);
+          font-weight: 600;
+          text-decoration: none;
+          white-space: nowrap;
+          scroll-snap-align: start;
+          transition: all 0.3s ease;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .tab-button i {
+          font-size: 15px;
+        }
+        
+        .tab-button:hover {
+          background: rgba(0, 134, 179, 0.1);
+          transform: scale(1.05);
+          box-shadow: 0 4px 12px rgba(0, 134, 179, 0.2);
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="logo" style="
+        width: 120px;
+        height: 40px;
+        background-image: url('logo.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        filter: brightness(0.8);
+    "></div>
+</nav>
+
+    <!-- Running Text -->
+    <div class="running-text">
+        <marquee class="marquee" direction="left">
+            🎮 Top Up Game Lebih Mudah & Cepat - Harga Terbaik di Pasaran - Proses Instant 24 Jam 🎮
+        </marquee>
+    </div>
+
+    <!-- Search -->
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Cari Apa Di Kevv' Store...." onkeyup="searchGame()">
+    </div>
+<!-- === TRENDING GAMES === -->
+<h2 style="padding: 0 5%"><i class="fas fa-fire"></i> Trending Games</h2>
+<div class="grid-container">
+    <div class="grid-item" data-category="trending">
+        <a href="page/mlbb.html"><img src="img/ml.jpeg" alt="Mobile Legends"></a>
+        <h3>Mobile Legends</h3>
+    </div>
+    <div class="grid-item" data-category="trending">
+        <a href="page/ff.html"><img src="img/ff.jpeg" alt="Free Fire"></a>
+        <h3>Free Fire</h3>
+    </div>
+    <div class="grid-item" data-category="trending">
+        <a href="page/HOK.html"><img src="img/HOK.jpg" alt="Honor Of Kings"></a>
+        <h3>Honor Of Kings</h3>
+    </div>
+    <div class="grid-item" data-category="trending">
+        <a href="page/blood.html"><img src="img/blood.jpeg" alt="Blood Strike"></a>
+        <h3>Blood Strike</h3>
+    </div>
+</div>
+
+<!-- Section Kategori -->
+<div class="tab-scroll">
+  <a href="page/pulsa.html" class="tab-button">
+    <i class="fas fa-signal"></i>
+    <span>Pulsa & Paket Data</span>
+  </a>
+  <a href="page/vocher.html" class="tab-button">
+    <i class="fas fa-ticket-alt"></i>
+    <span>Voucher</span>
+  </a>
+  <a href="page/e-wallet.html" class="tab-button">
+    <i class="fas fa-wallet"></i>
+    <span>E-Wallet</span>
+  </a>
+</div>
+
+    <!-- All Games -->
+    <h2 style="padding: 0 5%"><i class="fas fa-gamepad"></i> All Games</h2>
+    <div class="grid-container" id="gameGrid">
+    <div class="grid-item">
+        <a href="page/mlbb.html"><img src="img/ml.jpeg" alt="Mobile Legends"></a>
+        <h3>Mobile Legends</h3>
+    </div>
+    <div class="grid-item">
+        <a href="page/ff.html"><img src="img/ff.jpeg" alt="Free Fire"></a>
+        <h3>Free Fire</h3>
+    </div>
+    <div class="grid-item">
+        <a href="page/gpi.html"><img src="img/gpi.jpeg" alt="Genshin Impact"></a>
+        <h3>Genshin Impact</h3>
+    </div>
+    <div class="grid-item">
+        <a href="page/ball pool.html"><img src="img/ball pool.jpeg" alt="8 Ball Pool"></a>
+        <h3>8 Ball Pool</h3>
+    </div>
+    <div class="grid-item">
+        <a href="page/HOK.html"><img src="img/HOK.jpg" alt="Honor Of Kings"></a>
+        <h3>Honor Of Kings</h3>
+    </div>
+    <div class="grid-item">
+        <a href="page/lol.html"><img src="img/lol.jpeg" alt="League Of Legends"></a>
+        <h3>League Of Legends Wild Rift</h3>
+    </div>
+    <div class="grid-item">
+        <a href="page/pubg.html"><img src="img/pubg.jpg" alt="PUBG Mobile"></a>
+        <h3>PUBG Mobile</h3>
+    </div>
+    <div class="grid-item">
+        <a href="page/fcmobile.html"><img src="img/fcmbl.jpg" alt="FC Mobile"></a>
+        <h3>FC Mobile</h3>
+    </div>
+    <div class="grid-item">
+        <a href="page/stumble.html"><img src="img/stumble.jpg" alt="Stumble Guys"></a>
+        <h3>Stumble Guys</h3>
+    </div>
+    <div class="grid-item">
+        <a href="page/lolbiasa.html"><img src="img/lol biasa.jpg" alt="League Of Legends"></a>
+        <h3>League Of Legends</h3>
+    </div>
+    <div class="grid-item">
+        <a href="page/supersus.html"><img src="img/supersus.jpeg" alt="Super SUS"></a>
+        <h3>Super SUS</h3>
+    </div>
+    <div class="grid-item">
+        <a href="page/codm.html"><img src="img/codm.jpeg" alt="Call of Duty Mobile"></a>
+        <h3>Call Of Duty Mobile</h3>
+    </div>
+    <div class="grid-item">
+        <a href="page/aov.html"><img src="img/aov.png" alt="Arena Of Valor"></a>
+        <h3>Arena Of Valor</h3>
+    </div>
+    <div class="grid-item">
+        <a href="page/farlight.html"><img src="img/farlight.jpg" alt="Farlight 84"></a>
+        <h3>Farlight 84</h3>
+    </div>
+    <div class="grid-item">
+        <a href="page/sausage.html"><img src="img/sausage.jpeg" alt="Sausage Man"></a>
+        <h3>Sausage Man</h3>
+    </div>
+    <div class="grid-item">
+        <a href="page/blood.html"><img src="img/blood.jpeg" alt="Blood Strike"></a>
+        <h3>Blood Strike</h3>
+    </div>
+    <div class="grid-item">
+        <a href="page/point.html"><img src="img/pb.jpg" alt="Point Blank"></a>
+        <h3>Point Blank</h3>
+    </div>
+    <div class="grid-item">
+        <a href="page/colorBG.html"><img src="img/colorBG.jpeg" alt="ColorBANG"></a>
+        <h3>ColorBANG</h3>
+    </div>
+    <div class="grid-item">
+        <a href="page/gogo.html"><img src="img/gogo.jpeg" alt="Roblox"></a>
+        <h3>Magic Chess: Go Go</h3>
+    </div>
+</div>
+    <!-- Footer -->
+    <footer>
+            <p>&copy; 2024 GAMETOP - All rights reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        // Search Function
+        function searchGame() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const games = document.getElementsByClassName('grid-item');
+
+            for (let game of games) {
+                const title = game.getElementsByTagName('h3')[0].innerText.toLowerCase();
+                game.style.display = title.includes(input) ? 'block' : 'none';
+            }
+        }
+
+        // Category Slider Navigation
+        const categorySlider = document.getElementById('categorySlider');
+        const prevCategory = document.getElementById('prevCategory');
+        const nextCategory = document.getElementById('nextCategory');
+        
+        if (categorySlider && prevCategory && nextCategory) {
+            prevCategory.addEventListener('click', () => {
+                categorySlider.scrollBy({ left: -300, behavior: 'smooth' });
+            });
+            
+            nextCategory.addEventListener('click', () => {
+                categorySlider.scrollBy({ left: 300, behavior: 'smooth' });
+            });
+
+            // Add touch swipe functionality for mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            categorySlider.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+            
+            categorySlider.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+            
+            function handleSwipe() {
+                if (touchStartX - touchEndX > 50) {
+                    // Swipe left
+                    categorySlider.scrollBy({ left: 300, behavior: 'smooth' });
+                } else if (touchEndX - touchStartX > 50) {
+                    // Swipe right
+                    categorySlider.scrollBy({ left: -300, behavior: 'smooth' });
+                }
+            }
+        }
+
+        // Slider Auto Play
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        
+        if (slides.length > 0) {
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                document.querySelector('.slider').style.transform = `translateX(-${currentSlide * 100}%)`;
+            }
+            setInterval(nextSlide, 5000);
+        }
+    </script>
+<!-- Splash Screen -->
+<div id="splash" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#f5f7fa; color:#0086b3; display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:9999;">
+    <img src="logo.png" alt="Logo" style="width:100px; height:auto; margin-bottom:20px; filter: brightness(0.8);">
+    <h1 style="font-size:24px; margin-bottom:10px;">Kevv' Store</h1>
+    <p style="margin-bottom:20px;">Tunggu Sebentar, Loading inveronment</p>
+    
+    <!-- Loading Spinner -->
+    <div class="loader"></div>
+</div>
+
+<!-- Modal Popup -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="background-color: #ffffff; color: #0086b3; border-radius: 16px; box-shadow: 0 0 20px rgba(0, 134, 179, 0.2);">
+      <div class="modal-header border-0">
+        <h5 class="modal-title w-100 text-center" id="exampleModalLabel" style="font-weight: bold;">Selamat Datang di Kevv' Store</h5>
+        <button type="button" class="btn-close position-absolute end-0 me-3 mt-2" data-bs-dismiss="modal" aria-label="Tutup"></button>
+      </div>
+      <div class="modal-body text-center">
+        <p style="font-size: 16px;">Top up game favoritmu dengan cepat dan mudah di sini!</p>
+      </div>
+      <div class="modal-footer border-0 justify-content-center">
+        <button type="button" class="btn btn-primary text-white fw-bold px-4" data-bs-dismiss="modal" style="background-color: #0086b3; border: none;">Makasih Infonya Bang 👍</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', function () {
+    const splash = document.getElementById('splash');
+
+    // Deteksi apakah ini navigasi langsung (bukan back/forward)
+    const navType = performance.getEntriesByType("navigation")[0]?.type || performance.navigation.type;
+
+    if (navType === "navigate" || navType === 0) {
+      // Navigasi langsung, tampilkan splash & popup
+      setTimeout(() => {
+        splash.style.display = 'none';
+
+        const myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
+          backdrop: 'static'
+        });
+        myModal.show();
+      }, 2500);
+    } else {
+      // Back/forward dari halaman lain, langsung sembunyikan splash
+      splash.style.display = 'none';
+    }
+  });
+</script>
+</body>
+</html>
